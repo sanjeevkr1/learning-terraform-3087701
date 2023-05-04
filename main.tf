@@ -23,7 +23,7 @@ data "aws_ami" "app_ami" {
 
 # configure a VPC resource
 resource "aws_vpc" "my_vpc_web" {
-  cidr_block = "0.0.0.0/0"
+  cidr_block = "172.16.0.0/16"
 
   tags = {
     Name = "tf-example-vpc"
@@ -72,7 +72,7 @@ resource "aws_security_group_rule" "my_sg_rule_web_allow_all_http_in" {
   from_port   = 80
   to_port     = 80
   protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = [aws_vpc.my_vpc_web.cidr_block]
   security_group_id = aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id
 }
 
