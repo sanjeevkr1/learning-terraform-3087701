@@ -49,7 +49,7 @@ resource "aws_security_group" "my_sg_web_allow_http_https_in_allow_all_out" {
     to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = [aws_vpc.my_vpc_web.cidr_block]
-    ipv6_cidr_blocks = [aws_vpc.my_vpc_web.ipv6_cidr_block]
+    #ipv6_cidr_blocks = [aws_vpc.my_vpc_web.ipv6_cidr_block]
   }
 
   egress {
