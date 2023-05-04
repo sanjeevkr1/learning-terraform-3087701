@@ -23,7 +23,7 @@ data "aws_ami" "app_ami" {
 
 # configure a VPC resource
 resource "aws_vpc" "my_vpc_web" {
-  cidr_block = "172.16.0.0/16"
+  cidr_block = "0.0.0.0/0"
 
   tags = {
     Name = "tf-example-vpc"
