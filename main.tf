@@ -34,7 +34,7 @@ resource "aws_subnet" "my_subnet" {
   vpc_id            = aws_vpc.my_vpc_web.id
   cidr_block        = "172.16.10.0/24"
   availability_zone = "us-west-2a"
-  map_public_ip_on_launch = true
+  #map_public_ip_on_launch = true
   tags = {
     Name = "tf-example"
   }
