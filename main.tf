@@ -43,7 +43,7 @@ resource "aws_subnet" "my_subnet" {
 resource "aws_network_interface" "net_interface" {
   subnet_id   = aws_subnet.my_subnet.id
   private_ips = ["172.16.10.100"]
-
+  security_groups = [aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id]
   tags = {
     Name = "primary_network_interface"
   }
@@ -109,6 +109,7 @@ resource "aws_instance" "web" {
     network_interface_id = aws_network_interface.net_interface.id
     device_index         = 0
   }
-
-  vpc_security_group_ids = [aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id]
+ # https://stackoverflow.com/questions/57279090/error-network-interface-conflicts-with-vpc-security-group-ids
+ # 
+ # vpc_security_group_ids = [aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id]
 }
