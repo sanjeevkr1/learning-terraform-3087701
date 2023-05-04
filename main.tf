@@ -34,7 +34,7 @@ resource "aws_subnet" "my_subnet" {
   vpc_id            = aws_vpc.my_vpc_web.id
   cidr_block        = "172.16.10.0/24"
   availability_zone = "us-west-2a"
-
+  map_public_ip_on_launch = true
   tags = {
     Name = "tf-example"
   }
@@ -112,4 +112,8 @@ resource "aws_instance" "web" {
  # https://stackoverflow.com/questions/57279090/error-network-interface-conflicts-with-vpc-security-group-ids
  # 
  # vpc_security_group_ids = [aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id]
+}
+
+output "instance_public_ips" {
+  value = aws_instance.web.public_ip
 }
