@@ -87,5 +87,5 @@ resource "aws_instance" "web" {
     Name = "HelloWorld"
   }
 
-  vpc_sevpc_security_group_ids = [aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id]
+  vpc_security_group_ids = [aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id]
 }
