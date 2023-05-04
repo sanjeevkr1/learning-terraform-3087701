@@ -101,7 +101,7 @@ resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
   #instance_type = "t3.nano"
   instance_type= var.instance_type
-  associate_public_ip_address = true
+  #associate_public_ip_address = true
   tags = {
     Name = "HelloWorld"
   }
