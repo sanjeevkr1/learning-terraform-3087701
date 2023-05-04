@@ -42,7 +42,7 @@ resource "aws_subnet" "my_subnet" {
 
 resource "aws_network_interface" "net_interface" {
   subnet_id   = aws_subnet.my_subnet.id
-  #private_ips = ["172.16.10.100"]
+  private_ips = ["172.16.10.100"]
   security_groups = [aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id]
   tags = {
     Name = "primary_network_interface"
@@ -101,7 +101,7 @@ resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
   #instance_type = "t3.nano"
   instance_type= var.instance_type
-
+  associate_public_ip_address = true
   tags = {
     Name = "HelloWorld"
   }
