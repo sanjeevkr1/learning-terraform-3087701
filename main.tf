@@ -26,7 +26,26 @@ resource "aws_vpc" "my_vpc_web" {
   cidr_block = "172.16.0.0/16"
 
   tags = {
-    Name = "tf-example-vpc"
+    Name = "tf-example"
+  }
+}
+
+resource "aws_subnet" "my_subnet" {
+  vpc_id            = aws_vpc.my_vpc_web.id
+  cidr_block        = "172.16.10.0/24"
+  availability_zone = "us-west-2a"
+
+  tags = {
+    Name = "tf-example"
+  }
+}
+
+resource "aws_network_interface" "net_interface" {
+  subnet_id   = aws_subnet.my_subnet.id
+  private_ips = ["172.16.10.100"]
+
+  tags = {
+    Name = "primary_network_interface"
   }
 }
 
@@ -85,6 +104,10 @@ resource "aws_instance" "web" {
 
   tags = {
     Name = "HelloWorld"
+  }
+  network_interface {
+    network_interface_id = aws_network_interface.net_interface.id
+    device_index         = 0
   }
 
   vpc_security_group_ids = [aws_security_group.my_sg_web_allow_http_https_in_allow_all_out.id]
